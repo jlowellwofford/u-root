@@ -13,6 +13,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -92,9 +93,24 @@ func informIfUnknownFS(originFS string) {
 	}
 }
 
+func printMounts() error {
+	mts, err := ioutil.ReadFile("/proc/mounts")
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s", mts)
+	return nil
+}
+
 func main() {
 	flag.Parse()
 	a := flag.Args()
+
+	if flag.NArg()+flag.NFlag() == 0 {
+		printMounts()
+		os.Exit(0)
+	}
+
 	if len(a) < 2 {
 		flag.Usage()
 		os.Exit(1)

@@ -17,6 +17,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/u-root/u-root/pkg/loop"
@@ -25,6 +26,8 @@ import (
 )
 
 type mountOptions []string
+
+var nfsre = regexp.MustCompile(`^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):[/\w]+$`)
 
 func (o *mountOptions) String() string {
 	return strings.Join(*o, ",")
@@ -142,6 +145,13 @@ func main() {
 	if *fsType == "" {
 		// mandatory parameter for the moment
 		log.Fatalf("No file system type provided!\nUsage: mount [-r] [-o mount options] -t fstype dev path")
+	}
+	if *fsType == "nfs" || *fsType == "nfs3" || *fsType == "nfs4" {
+		// deal with <ip>:<mntpt> syntax
+		match := nfsre.FindAllStringSubmatch(dev, -1)
+		if len(match) > 0 && len(match[0]) > 1 {
+			data = append(data, fmt.Sprintf("addr=%s", match[0][1]))
+		}
 	}
 	if err := mount.Mount(dev, path, *fsType, strings.Join(data, ","), flags); err != nil {
 		log.Printf("%v", err)

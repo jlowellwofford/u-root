@@ -17,6 +17,7 @@ require (
 	github.com/google/go-tpm v0.2.1-0.20200615092505-5d8a91de9ae3
 	github.com/google/goexpect v0.0.0-20191001010744-5b6988669ffa
 	github.com/google/goterm v0.0.0-20190703233501-fc88cf888a3f
+	github.com/hugelgupf/socketpair v0.0.0-20190730060125-05d35a94e714 // indirect
 	github.com/insomniacslk/dhcp v0.0.0-20200814125043-2e1bf785d039
 	github.com/intel-go/cpuid v0.0.0-20200819041909-2aa72927c3e2
 	github.com/jsimonetti/rtnetlink v0.0.0-20200505065535-3ee32e7e21a4 // indirect
@@ -31,7 +32,6 @@ require (
 	github.com/safchain/ethtool v0.0.0-20200218184317-f459e2d13664
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.5.1
-	github.com/u-root/iscsinl v0.1.0
 	github.com/ulikunitz/xz v0.5.8
 	github.com/vishvananda/netlink v1.1.1-0.20200221165523-c79a4b7b4066
 	github.com/vishvananda/netns v0.0.0-20200728191858-db3c7e526aae // indirect
